@@ -21,28 +21,30 @@ and Docker setup here. Hopefully, you know what you're doing.
 
 searchx-migrations/
 │
-├── docker/
-│   ├── combolist/
-│   │   └── docker-compose.yml
-│   ├── discord_messages/                                 # Example
-│   │   └── docker-compose.yml                            # Example
-│
 ├── migrations/
 │   ├── combolist/
 │   │   ├── V1__create_combolist_file_table.sql
 │   │   ├── V2__create_combolist_entries_user_table.sql
 │   │   ├── V3__create_combolist_entries_urls_table.sql
-│   ├── discord_messages/                                 # Example
-│   │   ├── V1__create_users_table.sql                    # Example
-│   │   ├── V2__create_guilds_table.sql                   # Example
-│   │   ├── V3__create_messages_table.sql                 # Example
+│   ├── searchx/
+│   │   ├── V1__create_users_table.sql
+│   │   ├── V2__create_agents_table.sql
 │
-└── run_migrations.py
+├── docker-compose.yml
+├── setup.sh
+└── docker.sh
 
 Folder Explanation:
 ======================
-- **`docker/`**: Contains Docker Compose files for each database, with service-specific 
-  configurations.
-- **`migrations/`**: Contains SQL migration files for different databases.
-- **`run_migrations.py`**: Python script that automates the execution of Docker Compose 
-  and the application of migrations.
+- **`migrations/`**: Contains versioned SQL migration scripts organized by database/module.
+  Each subfolder (e.g. `combolist/`, `searchx/`) holds its own schema evolution files 
+  compatible with Flyway.
+
+- **`docker-compose.yml`**: Defines all services needed to run the environment, such as
+  PostgreSQL containers for each schema.
+
+- **`setup.sh`**: Shell script that ensures correct UID/GID ownership of PostgreSQL 
+  data directories before container startup.
+
+- **`docker.sh`**: Script that handles Docker container operations, such as starting specific 
+  services and running Flyway migrations.
