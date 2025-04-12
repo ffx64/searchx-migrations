@@ -1,6 +1,6 @@
 -- Create the file_combolist table to store information about log files
-CREATE TABLE file_combolist (
-    id SERIAL PRIMARY KEY,                           -- Unique identifier for the log file
+CREATE TABLE IF NOT EXISTS file_combolist (
+    id SERIAL PRIMARY KEY,                            -- Unique identifier for the log file
     file_name VARCHAR(255) NOT NULL,                  -- Name of the file
     file_size BIGINT NOT NULL,                        -- Size of the file in bytes
     file_hash BYTEA NOT NULL,                         -- Hash of the file (e.g., SHA-256) -> Use BYTEA for binary data

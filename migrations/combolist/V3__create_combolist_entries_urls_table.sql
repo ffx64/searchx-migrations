@@ -1,5 +1,5 @@
 -- Create the table to store all URLs for a given username and password
-CREATE TABLE combolist_entries_urls (
+CREATE TABLE IF NOT EXISTS combolist_entries_urls (
     id SERIAL PRIMARY KEY,                           -- Unique identifier for the entry
     combolist_entries_user_id INT NOT NULL,           -- ID of the corresponding entry in combolist_entries_user table
     url TEXT NOT NULL,                               -- URL associated with the username and password pair

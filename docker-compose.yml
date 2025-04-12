@@ -1,0 +1,52 @@
+services:
+  searchx_db:
+    image: bitnami/postgresql:17
+    container_name: searchx-database
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: searchx
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./data/searchx_db:/bitnami/postgresql/data
+
+  combolist_db:
+    image: bitnami/postgresql:17
+    container_name: searchx-combolist-database
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: searchx_combolist
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./data/combolist_db:/bitnami/postgresql/data
+
+  searchx_flyway:
+    image: flyway/flyway:11.3
+    container_name: searchx-flyway
+    environment:
+      FLYWAY_URL: jdbc:postgresql://searchx_db:5432/searchx
+      FLYWAY_USER: docker
+      FLYWAY_PASSWORD: docker
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql
+    volumes:
+      - ./migrations/searchx:/flyway/sql
+    command: ["migrate"]
+    depends_on:
+      - searchx_db
+
+  combolist_flyway:
+    image: flyway/flyway:11.3
+    container_name: combolist-flyway
+    environment:
+      FLYWAY_URL: jdbc:postgresql://combolist_db:5432/searchx_combolist
+      FLYWAY_USER: docker
+      FLYWAY_PASSWORD: docker
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql
+    volumes:
+      - ./migrations/combolist:/flyway/sql
+    command: ["migrate"]
+    depends_on:
+      - combolist_db

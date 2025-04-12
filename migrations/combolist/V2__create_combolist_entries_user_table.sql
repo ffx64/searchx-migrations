@@ -1,5 +1,5 @@
 -- Create the combolist_entries_user table to store the extracted log entries from files
-CREATE TABLE combolist_entries_user (
+CREATE TABLE IF NOT EXISTS combolist_entries_user (
     id SERIAL PRIMARY KEY,                           -- Unique identifier for the log entry
     file_combolist_id INT NOT NULL,                  -- Foreign key referencing the log file (file_combolist table)
     username TEXT NOT NULL,                          -- Username extracted from the log
