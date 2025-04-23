@@ -23,14 +23,15 @@ searchx-migrations/
 │
 ├── migrations/
 │   ├── combolist/
-│   │   ├── V1__create_combolist_file_table.sql
-│   │   ├── V2__create_combolist_entries_user_table.sql
-│   │   ├── V3__create_combolist_entries_urls_table.sql
+│   │   ├── V1__create_files_table.sql
+│   │   ├── V2__create_users_table.sql
+│   │   ├── V3__create_urls_table.sql
 │   ├── searchx/
 │   │   ├── V1__create_users_table.sql
 │   │   ├── V2__create_agents_table.sql
 │
 ├── docker-compose.yml
+├── clean_all.sh
 ├── setup.sh
 └── docker.sh
 
