@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS case_assignments (
     role TEXT DEFAULT 'analyst',                   -- The role of the user in the case ('coordinator', 'agent', 'analyst')
     assigned_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP  -- Timestamp when the user was assigned to the case
 );
+
+
